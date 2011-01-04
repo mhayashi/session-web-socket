@@ -1,0 +1,3 @@
+[submodule "example/static/Socket.IO"]
+	path = example/static/Socket.IO
+	url = https://github.com/LearnBoost/Socket.IO.git
