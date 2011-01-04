@@ -3,7 +3,7 @@ SessionWebSocket(function(socket){
 		console.log("SWS:",msg);
   });
 
-  setInterval(function() {
+  setTimeout(function() {
     socket.send('Succeed!');
   }, 1000);
 });
