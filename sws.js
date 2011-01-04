@@ -41,10 +41,7 @@ module.exports = function verifier(options)
         next();
       }
     }
-
-    // こちらは WebSocket のセッションを管理する関数です。
     , ws: function attach_client(cb) {
-
       return function route_client(client) {
         // new client is here!
         // verify session or default to none
