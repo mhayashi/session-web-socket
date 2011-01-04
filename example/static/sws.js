@@ -1,23 +1,19 @@
-// 次に クライアントサイドのモジュールのコードです。トークンを取得して、返ってきたらコネクションを張り直します。
-
 function SessionWebSocket(cb) {
   var xhr = new XMLHttpRequest()
+  //use https and go over the same port as the server
   xhr.open("GET","/?no-cache="+(new Date()+0));
 
-  // トークンを取得するためのヘッダを設定します。
+  //set our header to get the token
   xhr.setRequestHeader("x-access-request-token","simple");
-  // レスポンスに対するコールバックを設定します。
   xhr.onreadystatechange = function xhrverify() {
-    // 受信完了
     if (xhr.readyState === 4) {
       var tmp;
       try {
-        // トークンが返ってきていたら、新規に WebSocket の接続を開始します。
         if (tmp = JSON.parse(xhr.responseText)["x-access-token"]) {
           var socket = new io.Socket();
           cb(socket);
           socket.connect();
-          // 取得したトークンを送っています
+          //get the first part as the secret
           socket.send(tmp.split(";")[0]);
         }
       }
@@ -27,6 +23,6 @@ function SessionWebSocket(cb) {
     }
   };
 
-  // リクエストを送信します。
+  //send out the request
   xhr.send();
 }
