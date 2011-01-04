@@ -76,6 +76,7 @@ module.exports = function verifier(options)
           else {
             //insecure does not stop the first message!
             client.emit("insecure");
+            client.connection.end();
           }
         });
 
